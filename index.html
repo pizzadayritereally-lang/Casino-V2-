@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аурельское Казино — Элегантность, азарт и удача без риска</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Inter:wght@300;400;500;600&amp;display=swap');
+        
+        :root {
+            --gold: #D4AF37;
+            --gold-dark: #C5A46E;
+            --red: #9F1239;
+            --bg: #0C0C0C;
+            --card: #1A1A1A;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .casino-bg {
+            background-color: #0C0C0C;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .luxury-card {
+            background-color: #1A1A1A;
+            border: 1px solid #3F3F46;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .luxury-card:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .gold-text {
+            color: #D4AF37;
+        }
+
+        .gold-btn {
+            background-color: #D4AF37;
+            color: #111111;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .gold-btn:hover {
+            background-color: #C5A46E;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgb(212 175 55 / 0.3);
+        }
+
+        .red-btn {
+            background-color: #9F1239;
+            color: white;
+            font-weight: 600;
+        }
+
+        .red-btn:hover {
+            background-color: #B91C1C;
+        }
+
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+
+        .nav-tab {
+            position: relative;
+            padding-bottom: 8px;
+            color: #A3A3A3;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-tab.active {
+            color: #D4AF37;
+        }
+        
+        .nav-tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #D4AF37, #C5A46E);
+        }
+
+        .balance-display {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
+        .slot-reel {
+            height: 120px;
+            overflow: hidden;
+            border: 4px solid #3F3F46;
+            border-radius: 12px;
+            background: #111111;
+            position: relative;
+        }
+
+        .slot-symbol {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            transition: transform 0.1s linear;
+        }
+
+        .roulette-canvas {
+            border: 8px solid #3F3F46;
+            border-radius: 9999px;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .toast {
+            animation: slideInUp 0.3s ease forwards;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .win-text {
+            animation: winPop 0.6s ease forwards;
+        }
+
+        .game-modal {
+            animation: modalEnter 0.2s ease forwards;
+        }
+
+        .transaction-row {
+            transition: background-color 0.1s ease;
+        }
+
+        .transaction-row:hover {
+            background-color: #27251f;
+        }
+
+        .high-roller-badge {
+            background: linear-gradient(90deg, #D4AF37, #C5A46E);
+            color: #111111;
+            font-size: 0.65rem;
+            padding: 1px 8px;
+            border-radius: 9999px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .casino-shadow {
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5),
+                        0 10px 10px -6px rgb(0 0 0 / 0.3);
+        }
+        
+        .symbol {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="bg-[#0C0C0C] text-[#F5F5F5] min-h-screen">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-[#0C0C0C]/95 backdrop-blur-lg border-b border-[#3F3F46]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#D4AF37] to-[#C5A46E] flex items-center justify-center shadow-lg">
+                        <i class="fa-solid fa-dice text-[#111111] text-3xl"></i>
+                    </div>
+                    <div>
+                        <div class="heading-serif text-3xl font-bold tracking-tighter">Аурельское</div>
+                        <div class="text-[#D4AF37] text-sm -mt-1.5 font-medium tracking-[3px]">КАЗИНО</div>
+                    </div>
+                </div>
+
+                <!-- Balance -->
+                <div class="flex items-center gap-x-4">
+                    <div class="px-5 py-2.5 rounded-3xl bg-[#1A1A1A] border border-[#3F3F46] flex items-center gap-x-3">
+                        <div class="flex items-center gap-x-2">
+                            <i class="fa-solid fa-coins text-[#D4AF37]"></i>
+                            <div>
+                                <div class="text-xs text-[#A3A3A3] tracking-wider">БАЛАНС</div>
+                                <div id="header-balance" 
+                                     class="balance-display text-2xl font-semibold tabular-nums text-white">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick deposit button -->
+                    <button onclick="showSection('deposit')"
+                            class="gold-btn px-6 py-2.5 rounded-3xl text-sm flex items-center gap-x-2 font-semibold shadow-lg">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Пополнить</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="border-b border-[#3F3F46] bg-[#0C0C0C]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-x-2 overflow-x-auto py-1 hide-scrollbar">
+                <button onclick="showSection('home')" id="nav-home"
+                        class="nav-tab active px-6 py-3 text-sm font-medium flex items-center gap-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-home w-4"></i>
+                    <span>Главная</span>
+                </button>
+                <button onclick="showSection('deposit')" id="nav-deposit"
+                        class="nav-tab px-6 py-3 text-sm font-medium flex items-center gap-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-wallet w-4"></i>
+                    <span>Пополнение</span>
+                </button>
+                <button onclick="showSection('games')" id="nav-games"
+                        class="nav-tab px-6 py-3 text-sm font-medium flex items-center gap-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-gamepad w-4"></i>
+                    <span>Игры</span>
+                </button>
+                <button onclick="showSection('promo')" id="nav-promo"
+                        class="nav-tab px-6 py-3 text-sm font-medium flex items-center gap-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-ticket w-4"></i>
+                    <span>Промокоды</span>
+                </button>
+                <button onclick="showSection('history')" id="nav-history"
+                        class="nav-tab px-6 py-3 text-sm font-medium flex items-center gap-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-history w-4"></i>
+                    <span>История</span>
+                </button>
+                <button onclick="showSection('about')" id="nav-about"
+                        class="nav-tab px-6 py-3 text-sm font-medium flex items-center gap-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-info-circle w-4"></i>
+                    <span>О казино</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        
+        <!-- HOME / LOBBY -->
+        <div id="section-home" class="section active">
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center gap-x-2 px-4 py-1 rounded-full bg-[#1A1A1A] border border-[#3F3F46] mb-4">
+                    <div class="w-2 h-2 bg-[#D4AF37] rounded-full animate-pulse"></div>
+                    <span class="text-sm text-[#D4AF37] font-medium tracking-wider">VIP ЗАЛ ОТКРЫТ</span>
+                </div>
+                
+                <h1 class="heading-serif text-7xl md:text-8xl font-bold tracking-tighter mb-3">Аурельское Казино</h1>
+                <p class="text-2xl text-[#A3A3A3] max-w-md mx-auto">Элегантность, азарт и удача без риска реальных денег.</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div class="luxury-card rounded-3xl p-6 text-center">
+                    <div class="text-[#A3A3A3] text-sm mb-1">Всего пополнено</div>
+                    <div id="stat-total-deposited" class="text-3xl font-semibold tabular-nums">0</div>
+                    <div class="text-xs text-[#A3A3A3]">AUR</div>
+                </div>
+                <div class="luxury-card rounded-3xl p-6 text-center">
+                    <div class="text-[#A3A3A3] text-sm mb-1">Всего выиграно</div>
+                    <div id="stat-total-won" class="text-3xl font-semibold tabular-nums text-[#4ADE80]">0</div>
+                    <div class="text-xs text-[#A3A3A3]">AUR</div>
+                </div>
+                <div class="luxury-card rounded-3xl p-6 text-center">
+                    <div class="text-[#A3A3A3] text-sm mb-1">Сыграно игр</div>
+                    <div id="stat-games-played" class="text-3xl font-semibold tabular-nums">0</div>
+                </div>
+                <div class="luxury-card rounded-3xl p-6 text-center">
+                    <div class="text-[#A3A3A3] text-sm mb-1">Крупнейший выигрыш</div>
+                    <div id="stat-biggest-win" class="text-3xl font-semibold tabular-nums text-[#D4AF37]">0</div>
+                    <div class="text-xs text-[#A3A3A3]">AUR</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Deposit Card -->
+                <div onclick="showSection('deposit')" 
+                     class="luxury-card rounded-3xl p-8 cursor-pointer group hover:border-[#D4AF37]">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <i class="fa-solid fa-wallet text-4xl text-[#D4AF37] mb-4"></i>
+                            <h3 class="text-2xl font-semibold">Пополнить баланс</h3>
+                            <p class="text-[#A3A3A3] mt-1">Мгновенное зачисление</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-sm text-[#D4AF37] group-hover:gap-x-2 transition-all">
+                        <span>Выбрать сумму</span> 
+                        <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Slots Card -->
+                <div onclick="showSection('games'); setTimeout(() => openGameModal('slots'), 150)" 
+                     class="luxury-card rounded-3xl p-8 cursor-pointer group hover:border-[#D4AF37]">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <i class="fa-solid fa-slot-machine text-4xl text-[#D4AF37] mb-4"></i>
+                            <h3 class="text-2xl font-semibold">Слоты</h3>
+                            <p class="text-[#A3A3A3] mt-1">Классические 3 барабана</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs px-3 py-1 rounded-full bg-[#27251f] text-[#D4AF37] inline-block">RTP ~94%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-sm text-[#D4AF37] group-hover:gap-x-2 transition-all">
+                        <span>Играть сейчас</span> 
+                        <i class="fa-solid fa-play ml-2"></i>
+                    </div>
+                </div>
+
+                <!-- Roulette Card -->
+                <div onclick="showSection('games'); setTimeout(() => openGameModal('roulette'), 150)" 
+                     class="luxury-card rounded-3xl p-8 cursor-pointer group hover:border-[#D4AF37]">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <i class="fa-solid fa-sync text-4xl text-[#D4AF37] mb-4"></i>
+                            <h3 class="text-2xl font-semibold">Рулетка</h3>
+                            <p class="text-[#A3A3A3] mt-1">Европейская • 37 секторов</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs px-3 py-1 rounded-full bg-[#27251f] text-[#D4AF37] inline-block">x36 макс</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-sm text-[#D4AF37] group-hover:gap-x-2 transition-all">
+                        <span>Сделать ставку</span> 
+                        <i class="fa-solid fa-play ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEPOSIT SECTION -->
+        <div id="section-deposit" class="section">
+            <div class="max-w-2xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h2 class="heading-serif text-5xl font-bold tracking-tight">Пополнение баланса</h2>
+                        <p class="text-[#A3A3A3] mt-2">Выберите удобную сумму или введите свою</p>
+                    </div>
+                </div>
+
+                <!-- Fixed amounts -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                    <button onclick="deposit(10)" 
+                            class="luxury-card hover:border-[#D4AF37] transition-all rounded-3xl py-6 px-4 text-center group">
+                        <div class="text-4xl font-semibold text-[#D4AF37]">10</div>
+                        <div class="text-xs text-[#A3A3A3] mt-1 tracking-wider">AUR</div>
+                        <div class="mt-3 text-[10px] px-3 py-0.5 rounded-full bg-[#27251f] text-[#D4AF37] inline-block">БАЗОВЫЙ</div>
+                    </button>
+                    
+                    <button onclick="deposit(20)" 
+                            class="luxury-card hover:border-[#D4AF37] transition-all rounded-3xl py-6 px-4 text-center group">
+                        <div class="text-4xl font-semibold text-[#D4AF37]">20</div>
+                        <div class="text-xs text-[#A3A3A3] mt-1 tracking-wider">AUR</div>
+                        <div class="mt-3 text-[10px] px-3 py-0.5 rounded-full bg-[#27251f] text-[#D4AF37] inline-block">ПОПУЛЯРНЫЙ</div>
+                    </button>
+                    
+                    <button onclick="deposit(50)" 
+                            class="luxury-card hover:border-[#9F1239] transition-all rounded-3xl py-6 px-4 text-center group">
+                        <div class="text-4xl font-semibold text-[#9F1239]">50</div>
+                        <div class="text-xs text-[#A3A3A3] mt-1 tracking-wider">AUR</div>
+                        <div class="mt-3 text-[10px] px-3 py-0.5 rounded-full bg-[#3F1F1F] text-[#9F1239] inline-block">ПРЕМИУМ</div>
+                    </button>
+                    
+                    <button onclick="deposit(100)" 
+                            class="luxury-card hover:border-[#9F1239] transition-all rounded-3xl py-6 px-4 text-center group relative">
+                        <div class="text-4xl font-semibold text-[#9F1239]">100</div>
+                        <div class="text-xs text-[#A3A3A3] mt-1 tracking-wider">AUR</div>
+                        <div class="mt-3 text-[10px] px-3 py-0.5 rounded-full bg-gradient-to-r from-[#9F1239] to-[#B91C1C] text-white inline-block">HIGH ROLLER</div>
+                    </button>
+                    
+                    <button onclick="deposit(200)" 
+                            class="luxury-card hover:border-[#D4AF37] transition-all rounded-3xl py-6 px-4 text-center group relative border-2 border-[#D4AF37]">
+                        <div class="text-4xl font-semibold text-[#D4AF37]">200</div>
+                        <div class="text-xs text-[#A3A3A3] mt-1 tracking-wider">AUR</div>
+                        <div class="mt-3">
+                            <span class="high-roller-badge">VIP</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Custom amount -->
+                <div class="luxury-card rounded-3xl p-8">
+                    <div class="mb-4">
+                        <label class="block text-sm text-[#A3A3A3] mb-2">Произвольная сумма</label>
+                        <div class="flex gap-x-3">
+                            <div class="flex-1 relative">
+                                <input id="custom-deposit" type="number" min="1" max="1000" value="50"
+                                       class="w-full bg-[#111111] border border-[#3F3F46] rounded-2xl px-6 py-4 text-2xl font-semibold focus:outline-none focus:border-[#D4AF37]">
+                                <div class="absolute right-6 top-5 text-[#A3A3A3] text-xl">AUR</div>
+                            </div>
+                            <button onclick="depositCustom()" 
+                                    class="gold-btn px-10 rounded-2xl text-lg font-semibold whitespace-nowrap">
+                                Пополнить
+                            </button>
+                        </div>
+                        <p class="text-xs text-[#A3A3A3] mt-2">От 1 до 1000 AUR</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAMES SECTION -->
+        <div id="section-games" class="section">
+            <div class="mb-8">
+                <h2 class="heading-serif text-5xl font-bold tracking-tight">Выберите игру</h2>
+                <p class="text-[#A3A3A3] mt-2">Чем выше ставка — тем выше потенциал джекпота</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl">
+                <!-- Slots Card -->
+                <div class="luxury-card rounded-3xl p-8 cursor-pointer group" onclick="openGameModal('slots')">
+                    <div class="flex items-start justify-between mb-8">
+                        <div>
+                            <div class="flex items-center gap-x-3 mb-3">
+                                <i class="fa-solid fa-slot-machine text-5xl text-[#D4AF37]"></i>
+                            </div>
+                            <h3 class="text-4xl font-semibold tracking-tight">Слоты</h3>
+                            <p class="text-[#A3A3A3]">Классика с джекпотом</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="px-4 py-1 text-xs rounded-2xl bg-[#27251f] text-[#D4AF37] inline-block mb-1">3 БАРАБАНА</div>
+                            <div class="text-xs text-[#A3A3A3]">Макс. x50</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between text-sm">
+                        <div>
+                            <span class="text-[#4ADE80]">Низкие ставки:</span> частые выигрыши<br>
+                            <span class="text-[#D4AF37]">Высокие ставки:</span> реальный джекпот
+                        </div>
+                        <button class="gold-btn px-8 py-3 rounded-2xl text-sm font-semibold group-hover:scale-105 transition-transform">
+                            ИГРАТЬ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Roulette Card -->
+                <div class="luxury-card rounded-3xl p-8 cursor-pointer group" onclick="openGameModal('roulette')">
+                    <div class="flex items-start justify-between mb-8">
+                        <div>
+                            <div class="flex items-center gap-x-3 mb-3">
+                                <i class="fa-solid fa-sync text-5xl text-[#D4AF37]"></i>
+                            </div>
+                            <h3 class="text-4xl font-semibold tracking-tight">Рулетка</h3>
+                            <p class="text-[#A3A3A3]">Европейская рулетка</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="px-4 py-1 text-xs rounded-2xl bg-[#27251f] text-[#D4AF37] inline-block mb-1">37 СЕКТОРОВ</div>
+                            <div class="text-xs text-[#A3A3A3]">Макс. x18 (Зелёное)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between text-sm">
+                        <div>
+                            <span class="text-[#4ADE80]">Красное / Чёрное:</span> x2<br>
+                            <span class="text-[#D4AF37]">Зелёное (0):</span> x36 — джекпот
+                        </div>
+                        <button class="gold-btn px-8 py-3 rounded-2xl text-sm font-semibold group-hover:scale-105 transition-transform">
+                            ИГРАТЬ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROMO CODES -->
+        <div id="section-promo" class="section max-w-xl mx-auto">
+            <div class="luxury-card rounded-3xl p-10">
+                <div class="text-center mb-8">
+                    <i class="fa-solid fa-ticket text-5xl text-[#D4AF37] mb-4"></i>
+                    <h2 class="heading-serif text-4xl font-bold tracking-tight">Промокоды</h2>
+                    <p class="text-[#A3A3A3] mt-2">Активируйте код один раз и получите бонус</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <input id="promo-input" type="text" placeholder="Введите промокод" 
+                               class="w-full bg-[#111111] border border-[#3F3F46] rounded-2xl px-6 py-4 text-xl focus:outline-none focus:border-[#D4AF37] placeholder:text-[#666]">
+                    </div>
+                    
+                    <button onclick="activatePromoCode()" 
+                            class="w-full gold-btn py-4 rounded-2xl text-lg font-semibold">
+                        АКТИВИРОВАТЬ ПРОМОКОД
+                    </button>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-[#3F3F46]">
+                    <div class="text-xs text-[#A3A3A3] mb-3">Доступные коды (активируются один раз):</div>
+                    <div class="flex flex-wrap gap-2 text-sm">
+                        <div class="px-4 py-1.5 bg-[#27251f] rounded-2xl text-[#D4AF37] font-mono">ЛИН</div>
+                        <div class="px-4 py-1.5 bg-[#27251f] rounded-2xl text-[#D4AF37] font-mono">ФРЕДДИ</div>
+                        <div class="px-4 py-1.5 bg-[#27251f] rounded-2xl text-[#D4AF37] font-mono">МАРТИН777</div>
+                    </div>
+                    <p class="text-[10px] text-[#666] mt-4">Коды чувствительны к регистру? Нет — вводите как угодно.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- HISTORY -->
+        <div id="section-history" class="section">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="heading-serif text-5xl font-bold tracking-tight">История</h2>
+                    <p class="text-[#A3A3A3]">Все ваши транзакции и игры</p>
+                </div>
+                <button onclick="clearHistory()" 
+                        class="px-5 py-2 text-sm border border-[#3F3F46] hover:bg-[#1A1A1A] rounded-2xl flex items-center gap-x-2 text-[#A3A3A3]">
+                    <i class="fa-solid fa-trash"></i>
+                    <span>Очистить</span>
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex gap-x-2 mb-4">
+                <button onclick="filterHistory('all')" id="filter-all"
+                        class="px-5 py-1.5 text-sm rounded-2xl bg-[#D4AF37] text-black font-medium">Все</button>
+                <button onclick="filterHistory('deposit')" id="filter-deposit"
+                        class="px-5 py-1.5 text-sm rounded-2xl bg-[#1A1A1A] border border-[#3F3F46]">Пополнения</button>
+                <button onclick="filterHistory('game')" id="filter-game"
+                        class="px-5 py-1.5 text-sm rounded-2xl bg-[#1A1A1A] border border-[#3F3F46]">Игры</button>
+                <button onclick="filterHistory('win')" id="filter-win"
+                        class="px-5 py-1.5 text-sm rounded-2xl bg-[#1A1A1A] border border-[#3F3F46]">Выигрыши</button>
+            </div>
+
+            <div class="luxury-card rounded-3xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-[#3F3F46] text-xs text-[#A3A3A3]">
+                                <th class="text-left py-4 px-8 font-normal">ДАТА / ВРЕМЯ</th>
+                                <th class="text-left py-4 px-6 font-normal">ТИП</th>
+                                <th class="text-left py-4 px-6 font-normal">ОПИСАНИЕ</th>
+                                <th class="text-right py-4 px-8 font-normal">СУММА</th>
+                                <th class="text-right py-4 px-8 font-normal">БАЛАНС ПОСЛЕ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table" class="text-sm divide-y divide-[#3F3F46]">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div id="section-about" class="section max-w-3xl mx-auto">
+            <div class="luxury-card rounded-3xl p-12">
+                <div class="text-center mb-10">
+                    <i class="fa-solid fa-landmark text-[#D4AF37] text-6xl mb-6"></i>
+                    <h2 class="heading-serif text-5xl font-bold tracking-tight">Аурельское Казино</h2>
+                    <p class="text-xl text-[#A3A3A3] mt-2">С 1897 года • Теперь в цифровом мире</p>
+                </div>
+
+                <div class="prose prose-invert max-w-none text-[#D1D5DB] space-y-6 text-[15px]">
+                    <p>Аурельское Казино было основано в далёком 1897 году в вымышленном городе Аурель — небольшом, но невероятно элегантном европейском курорте у подножия Альп. С первых дней оно стало местом притяжения для аристократии, промышленников и искателей острых ощущений со всей Европы.</p>
+                    
+                    <p>За более чем столетие существования казино сохранило свои главные ценности: безупречный сервис, атмосферу благородного азарта и абсолютную честность. Здесь никогда не было места дешёвым трюкам — только классические игры, изысканный интерьер и атмосфера, в которой даже проигрыш ощущается достойно.</p>
+                    
+                    <p>Сегодня «Аурельское Казино» переехало в цифровое пространство, сохранив все традиции и дух настоящего VIP-зала. Мы не принимаем реальные деньги. Здесь вы можете безопасно почувствовать себя высокороллером, испытать азарт настоящих ставок и насладиться атмосферой легендарного заведения — без всякого риска.</p>
+                    
+                    <div class="pt-4 border-t border-[#3F3F46] text-center text-sm text-[#A3A3A3]">
+                        Это полностью вымышленный развлекательный проект.<br>
+                        Играйте responsibly. Играйте ради удовольствия.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- GAME MODALS -->
+    
+    <!-- SLOTS MODAL -->
+    <div id="slots-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4">
+        <div class="luxury-card w-full max-w-2xl rounded-3xl overflow-hidden game-modal">
+            <!-- Header -->
+            <div class="px-8 pt-8 pb-4 flex items-center justify-between border-b border-[#3F3F46]">
+                <div>
+                    <div class="flex items-center gap-x-3">
+                        <i class="fa-solid fa-slot-machine text-3xl text-[#D4AF37]"></i>
+                        <div>
+                            <div class="font-semibold text-2xl">Слоты</div>
+                            <div class="text-xs text-[#A3A3A3]">3 барабана • Джекпот до x50</div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeGameModal('slots')" class="text-3xl text-[#666] hover:text-white transition-colors">&times;</button>
+            </div>
+
+            <div class="p-8">
+                <!-- Bet controls -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="text-sm text-[#A3A3A3]">Ваша ставка</div>
+                        <div id="slots-bet-display" class="text-2xl font-semibold tabular-nums">50 <span class="text-sm text-[#A3A3A3]">AUR</span></div>
+                    </div>
+                    
+                    <div class="flex gap-x-2">
+                        <input type="range" id="slots-bet-slider" min="5" max="500" step="5" value="50"
+                               class="flex-1 accent-[#D4AF37]" oninput="updateSlotsBet()">
+                        <div class="w-24">
+                            <input type="number" id="slots-bet-input" value="50" min="5" max="500"
+                                   class="w-full bg-[#111111] border border-[#3F3F46] rounded-2xl px-4 py-2 text-center font-semibold"
+                                   onchange="updateSlotsBetFromInput()">
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between text-xs text-[#666] mt-1">
+                        <div>5</div>
+                        <div id="slots-tier-badge" class="high-roller-badge hidden">HIGH ROLLER</div>
+                        <div>500</div>
+                    </div>
+                </div>
+
+                <!-- Reels -->
+                <div class="flex justify-center gap-x-3 mb-8 bg-[#111111] p-8 rounded-3xl border border-[#3F3F46]">
+                    <div id="reel-1" class="slot-reel w-24 rounded-2xl overflow-hidden">
+                        <div class="slot-symbols" id="reel-symbols-1"></div>
+                    </div>
+                    <div id="reel-2" class="slot-reel w-24 rounded-2xl overflow-hidden">
+                        <div class="slot-symbols" id="reel-symbols-2"></div>
+                    </div>
+                    <div id="reel-3" class="slot-reel w-24 rounded-2xl overflow-hidden">
+                        <div class="slot-symbols" id="reel-symbols-3"></div>
+                    </div>
+                </div>
+
+                <!-- Result -->
+                <div id="slots-result" class="text-center min-h-[60px] mb-4 flex items-center justify-center">
+                    <div id="slots-result-text" class="text-xl font-medium"></div>
+                </div>
+
+                <!-- Action -->
+                <button onclick="spinSlots()" id="slots-spin-btn"
+                        class="w-full gold-btn py-4 text-xl font-bold rounded-2xl flex items-center justify-center gap-x-3">
+                    <i class="fa-solid fa-sync"></i>
+                    <span>КРУТИТЬ БАРАБАНЫ</span>
+                </button>
+                
+                <div class="text-center mt-4">
+                    <div onclick="closeGameModal('slots')" class="text-xs text-[#666] hover:text-[#A3A3A3] cursor-pointer inline-block">Закрыть</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROULETTE MODAL -->
+    <div id="roulette-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4">
+        <div class="luxury-card w-full max-w-3xl rounded-3xl overflow-hidden game-modal">
+            <div class="px-8 pt-8 pb-4 flex items-center justify-between border-b border-[#3F3F46]">
+                <div>
+                    <div class="flex items-center gap-x-3">
+                        <i class="fa-solid fa-sync text-3xl text-[#D4AF37]"></i>
+                        <div>
+                            <div class="font-semibold text-2xl">Европейская Рулетка</div>
+                            <div class="text-xs text-[#A3A3A3]">37 секторов • 0–36</div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeGameModal('roulette')" class="text-3xl text-[#666] hover:text-white transition-colors">&times;</button>
+            </div>
+
+            <div class="p-8">
+                <!-- Bet type selection -->
+                <div class="mb-6">
+                    <div class="text-sm text-[#A3A3A3] mb-3">Тип ставки</div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="selectRouletteBetType('red')" id="bet-red"
+                                class="flex flex-col items-center justify-center py-4 rounded-2xl border-2 border-[#9F1239] bg-[#3F1F1F] hover:bg-[#4A2525]">
+                            <div class="w-8 h-8 bg-[#9F1239] rounded-full mb-2"></div>
+                            <div class="font-semibold">Красное</div>
+                            <div class="text-xs text-[#A3A3A3]">x2</div>
+                        </button>
+                        
+                        <button onclick="selectRouletteBetType('black')" id="bet-black"
+                                class="flex flex-col items-center justify-center py-4 rounded-2xl border-2 border-[#111111] bg-[#1F1F1F] hover:bg-[#2A2A2A]">
+                            <div class="w-8 h-8 bg-black border border-white rounded-full mb-2"></div>
+                            <div class="font-semibold">Чёрное</div>
+                            <div class="text-xs text-[#A3A3A3]">x2</div>
+                        </button>
+                        
+                        <button onclick="selectRouletteBetType('green')" id="bet-green"
+                                class="flex flex-col items-center justify-center py-4 rounded-2xl border-2 border-[#166534] bg-[#0F2A1A] hover:bg-[#1A3A25]">
+                            <div class="w-8 h-8 bg-[#166534] rounded-full mb-2 flex items-center justify-center text-xs font-bold">0</div>
+                            <div class="font-semibold">Зелёное</div>
+                            <div class="text-xs text-[#A3A3A3]">x18</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bet amount -->
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2 text-sm">
+                        <div class="text-[#A3A3A3]">Ставка</div>
+                        <div id="roulette-bet-display" class="font-semibold tabular-nums">50 AUR</div>
+                    </div>
+                    <div class="flex gap-x-2">
+                        <input type="range" id="roulette-bet-slider" min="5" max="500" step="5" value="50"
+                               class="flex-1 accent-[#D4AF37]" oninput="updateRouletteBet()">
+                        <input type="number" id="roulette-bet-input" value="50" min="5" max="500"
+                               class="w-24 bg-[#111111] border border-[#3F3F46] rounded-2xl px-4 py-2 text-center font-semibold"
+                               onchange="updateRouletteBetFromInput()">
+                    </div>
+                </div>
+
+                <!-- Canvas Wheel -->
+                <div class="flex justify-center mb-8">
+                    <div class="relative">
+                        <canvas id="roulette-canvas" width="320" height="320" class="roulette-canvas"></canvas>
+                        <!-- Arrow -->
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-2 z-10">
+                            <div class="w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-b-[22px] border-b-[#D4AF37]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="roulette-result" class="text-center min-h-[52px] mb-5 flex items-center justify-center">
+                    <div id="roulette-result-text" class="text-xl font-medium"></div>
+                </div>
+
+                <button onclick="spinRoulette()" id="roulette-spin-btn"
+                        class="w-full gold-btn py-4 text-xl font-bold rounded-2xl flex items-center justify-center gap-x-3">
+                    <i class="fa-solid fa-sync"></i>
+                    <span>ЗАПУСТИТЬ РУЛЕТКУ</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[200] flex flex-col gap-y-3"></div>
+
+    <script>
+        // ==================== STATE & LOCALSTORAGE ====================
+        let state = {
+            balance: 0,
+            usedPromoCodes: [],
+            transactions: [],
+            stats: {
+                totalDeposited: 0,
+                totalWon: 0,
+                biggestWin: 0,
+                gamesPlayed: 0
+            }
+        };
+
+        const STORAGE_KEY = 'aurel_casino_v1';
+
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                state = JSON.parse(saved);
+            } else {
+                // First time - give a small welcome bonus
+                state.balance = 50;
+                addTransaction('deposit', 50, 'Приветственный бонус', state.balance);
+                saveState();
+            }
+        }
+
+        function updateBalance(newBalance, animate = true) {
+            const oldBalance = state.balance;
+            state.balance = Math.max(0, Math.floor(newBalance));
+            
+            // Update all balance displays
+            const displays = document.querySelectorAll('#header-balance, #home-balance');
+            displays.forEach(el => {
+                if (animate) {
+                    animateValue(el, oldBalance, state.balance, 600);
+                } else {
+                    el.textContent = state.balance.toLocaleString('ru-RU');
+                }
+            });
+            
+            saveState();
+            updateStatsDisplay();
+        }
+
+        function animateValue(element, start, end, duration) {
+            const range = end - start;
+            const startTime = performance.now();
+            
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+                const current = Math.floor(start + range * easeProgress);
+                
+                element.textContent = current.toLocaleString('ru-RU');
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.textContent = end.toLocaleString('ru-RU');
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        function addTransaction(type, amount, description, balanceAfter) {
+            const transaction = {
+                id: Date.now(),
+                date: new Date().toISOString(),
+                type: type, // 'deposit' | 'slots' | 'roulette'
+                amount: amount,
+                description: description,
+                balanceAfter: balanceAfter
+            };
+            
+            state.transactions.unshift(transaction);
+            
+            // Update stats
+            if (type === 'deposit') {
+                state.stats.totalDeposited += amount;
+            } else if (type === 'slots' || type === 'roulette') {
+                if (amount > 0) {
+                    state.stats.totalWon += amount;
+                    if (amount > state.stats.biggestWin) {
+                        state.stats.biggestWin = amount;
+                    }
+                }
+                state.stats.gamesPlayed++;
+            }
+            
+            saveState();
+            updateStatsDisplay();
+            
+            // Refresh history if visible
+            if (document.getElementById('section-history').classList.contains('active')) {
+                renderHistory();
+            }
+        }
+
+        function updateStatsDisplay() {
+            const elements = {
+                'stat-total-deposited': state.stats.totalDeposited,
+                'stat-total-won': state.stats.totalWon,
+                'stat-games-played': state.stats.gamesPlayed,
+                'stat-biggest-win': state.stats.biggestWin
+            };
+            
+            Object.keys(elements).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.textContent = elements[id].toLocaleString('ru-RU');
+                }
+            });
+        }
+
+        // ==================== NAVIGATION ====================
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            
+            // Show target
+            const target = document.getElementById('section-' + section);
+            if (target) target.classList.add('active');
+            
+            // Update nav
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            const navBtn = document.getElementById('nav-' + section);
+            if (navBtn) navBtn.classList.add('active');
+            
+            // Special actions
+            if (section === 'history') {
+                renderHistory();
+            }
+        }
+
+        // ==================== DEPOSIT ====================
+        function deposit(amount) {
+            const newBalance = state.balance + amount;
+            updateBalance(newBalance);
+            addTransaction('deposit', amount, `Пополнение на ${amount} AUR`, newBalance);
+            
+            showToast(`Баланс пополнен на ${amount} AUR`, 'success');
+            
+            // Confetti for big deposits
+            if (amount >= 100) {
+                launchConfetti(40);
+            }
+        }
+
+        function depositCustom() {
+            const input = document.getElementById('custom-deposit');
+            const amount = parseInt(input.value);
+            
+            if (!amount || amount < 1 || amount > 1000) {
+                showToast('Введите сумму от 1 до 1000 AUR', 'error');
+                return;
+            }
+            
+            deposit(amount);
+            input.value = 50;
+        }
+
+        // ==================== PROMO CODES ====================
+        const PROMO_CODES = {
+            'лин': 100,
+            'фредди': 50,
+            'мартин777': 20
+        };
+
+        function activatePromoCode() {
+            const input = document.getElementById('promo-input');
+            const code = input.value.trim().toLowerCase();
+            
+            if (!code) {
+                showToast('Введите промокод', 'error');
+                return;
+            }
+            
+            if (state.usedPromoCodes.includes(code)) {
+                showToast('Этот промокод уже был использован', 'error');
+                return;
+            }
+            
+            if (PROMO_CODES.hasOwnProperty(code)) {
+                const reward = PROMO_CODES[code];
+                const newBalance = state.balance + reward;
+                
+                updateBalance(newBalance);
+                state.usedPromoCodes.push(code);
+                addTransaction('deposit', reward, `Промокод: ${code.toUpperCase()}`, newBalance);
+                
+                showToast(`Промокод активирован! +${reward} AUR`, 'success');
+                launchConfetti(35);
+                
+                input.value = '';
+                saveState();
+            } else {
+                showToast('Промокод не найден. Проверьте правильность ввода.', 'error');
+            }
+        }
+
+        // ==================== SLOTS GAME ====================
+        let currentSlotsBet = 50;
+        const SLOT_SYMBOLS = ['💎', '7️⃣', '🍒', '🍋', '🔔', '⭐'];
+        
+        function updateSlotsBet() {
+            const slider = document.getElementById('slots-bet-slider');
+            const input = document.getElementById('slots-bet-input');
+            const display = document.getElementById('slots-bet-display');
+            const tierBadge = document.getElementById('slots-tier-badge');
+            
+            currentSlotsBet = parseInt(slider.value);
+            input.value = currentSlotsBet;
+            display.innerHTML = `${currentSlotsBet} <span class="text-sm text-[#A3A3A3]">AUR</span>`;
+            
+            // Tier badge
+            if (currentSlotsBet >= 200) {
+                tierBadge.classList.remove('hidden');
+                tierBadge.textContent = 'HIGH ROLLER';
+            } else if (currentSlotsBet >= 100) {
+                tierBadge.classList.remove('hidden');
+                tierBadge.textContent = 'MEDIUM';
+            } else {
+                tierBadge.classList.add('hidden');
+            }
+        }
+        
+        function updateSlotsBetFromInput() {
+            const input = document.getElementById('slots-bet-input');
+            let val = parseInt(input.value);
+            
+            if (isNaN(val)) val = 50;
+            val = Math.max(5, Math.min(500, val));
+            
+            currentSlotsBet = val;
+            document.getElementById('slots-bet-slider').value = val;
+            document.getElementById('slots-bet-display').innerHTML = 
+                `${val} <span class="text-sm text-[#A3A3A3]">AUR</span>`;
+        }
+
+        function getTier(bet) {
+            if (bet >= 200) return 'high';
+            if (bet >= 100) return 'medium';
+            return 'low';
+        }
+
+        function getWinChances(tier) {
+            // Сниженные шансы выигрыша (по просьбе заказчика)
+            if (tier === 'high') {
+                return { baseWin: 0.26, jackpot: 0.14 };
+            } else if (tier === 'medium') {
+                return { baseWin: 0.32, jackpot: 0.08 };
+            } else {
+                return { baseWin: 0.38, jackpot: 0.035 };
+            }
+        }
+
+        function calculateSlotsMultiplier(symbols, tier, isJackpot) {
+            const counts = {};
+            symbols.forEach(s => counts[s] = (counts[s] || 0) + 1);
+            
+            // Check for three of a kind
+            for (let sym in counts) {
+                if (counts[sym] === 3) {
+                    if (sym === '💎') return isJackpot ? 50 : 50;
+                    if (sym === '7️⃣') return 25;
+                    if (sym === '🍒') return 12;
+                    if (sym === '🍋') return 10;
+                    if (sym === '🔔' || sym === '⭐') return 8;
+                    return 6;
+                }
+            }
+            
+            // Two of a kind (only for low tier)
+            if (tier === 'low') {
+                for (let sym in counts) {
+                    if (counts[sym] === 2) return 2.5;
+                }
+            }
+            
+            return 0; // loss
+        }
+
+        function spinSlots() {
+            const btn = document.getElementById('slots-spin-btn');
+            if (btn.disabled) return;
+            
+            if (state.balance < currentSlotsBet) {
+                showToast('Недостаточно средств на балансе', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-sync fa-spin"></i> <span>КРУТИМ...</span>`;
+            
+            const tier = getTier(currentSlotsBet);
+            const chances = getWinChances(tier);
+            
+            // Determine outcome
+            let resultSymbols = [];
+            let multiplier = 0;
+            let isJackpotWin = false;
+            
+            const rand = Math.random();
+            
+            // First check for jackpot
+            if (rand < chances.jackpot) {
+                isJackpotWin = true;
+                // Force good combination for jackpot
+                if (Math.random() < 0.6) {
+                    resultSymbols = ['💎', '💎', '💎'];
+                    multiplier = 50;
+                } else if (Math.random() < 0.7) {
+                    resultSymbols = ['7️⃣', '7️⃣', '7️⃣'];
+                    multiplier = 25;
+                } else {
+                    resultSymbols = ['🍒', '🍒', '🍒'];
+                    multiplier = 12;
+                }
+            } else {
+                // Normal outcome
+                const willWin = Math.random() < chances.baseWin;
+                
+                if (willWin) {
+                    // Generate winning combination
+                    const winType = Math.random();
+                    if (winType < 0.15) resultSymbols = ['💎', '💎', '💎'];
+                    else if (winType < 0.3) resultSymbols = ['7️⃣', '7️⃣', '7️⃣'];
+                    else if (winType < 0.5) resultSymbols = ['🍒', '🍒', '🍒'];
+                    else if (winType < 0.7) resultSymbols = ['🍋', '🍋', '🍋'];
+                    else resultSymbols = ['🔔', '🔔', '🔔'];
+                    
+                    multiplier = calculateSlotsMultiplier(resultSymbols, tier, false);
+                } else {
+                    // Losing combination (mixed symbols)
+                    resultSymbols = [
+                        SLOT_SYMBOLS[Math.floor(Math.random() * SLOT_SYMBOLS.length)],
+                        SLOT_SYMBOLS[Math.floor(Math.random() * SLOT_SYMBOLS.length)],
+                        SLOT_SYMBOLS[Math.floor(Math.random() * SLOT_SYMBOLS.length)]
+                    ];
+                    // Make sure it's not accidentally a win
+                    while (resultSymbols[0] === resultSymbols[1] && resultSymbols[1] === resultSymbols[2]) {
+                        resultSymbols[2] = SLOT_SYMBOLS[Math.floor(Math.random() * SLOT_SYMBOLS.length)];
+                    }
+                    multiplier = 0;
+                }
+            }
+            
+            // Animate reels
+            animateReels(resultSymbols, () => {
+                // Calculate payout
+                const payout = Math.floor(currentSlotsBet * multiplier);
+                const netChange = payout - currentSlotsBet;
+                const newBalance = state.balance + netChange;
+                
+                updateBalance(newBalance);
+                
+                let description = `Слоты • Ставка ${currentSlotsBet} • `;
+                
+                if (multiplier > 0) {
+                    description += `Выигрыш ${payout} (${multiplier}x)`;
+                    addTransaction('slots', payout, description, newBalance);
+                    
+                    const resultEl = document.getElementById('slots-result-text');
+                    resultEl.innerHTML = `
+                        <span class="text-[#4ADE80] font-semibold">ВЫИГРЫШ! +${payout} AUR</span>
+                        <span class="block text-xs text-[#A3A3A3] mt-0.5">${multiplier}x множитель</span>
+                    `;
+                    
+                    if (multiplier >= 12 || isJackpotWin) {
+                        launchConfetti(80);
+                        showToast(`🎉 КРУПНЫЙ ВЫИГРЫШ! +${payout} AUR`, 'success');
+                    } else {
+                        showToast(`Вы выиграли ${payout} AUR`, 'success');
+                    }
+                } else {
+                    description += `Проигрыш`;
+                    addTransaction('slots', -currentSlotsBet, description, newBalance);
+                    
+                    const phrase = getRandomMotivationalPhrase();
+                    document.getElementById('slots-result-text').innerHTML = `
+                        <div>
+                            <span class="text-[#9F1239]">Не повезло на этот раз...</span>
+                            <div class="text-sm mt-1.5 text-[#A3A3A3] italic">"${phrase}"</div>
+                        </div>
+                    `;
+                }
+                
+                // Re-enable button
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = `<i class="fa-solid fa-sync"></i> <span>КРУТИТЬ БАРАБАНЫ</span>`;
+                }, 1200);
+            });
+        }
+        
+        function animateReels(finalSymbols, onComplete) {
+            const reels = [
+                document.getElementById('reel-symbols-1'),
+                document.getElementById('reel-symbols-2'),
+                document.getElementById('reel-symbols-3')
+            ];
+            
+            reels.forEach((reel, index) => {
+                reel.innerHTML = '';
+                reel.style.transition = 'none';
+                reel.style.transform = 'translateY(0)';
+                
+                // Больше символов для плавной прокрутки
+                for (let i = 0; i < 30; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'slot-symbol';
+                    div.innerHTML = `<span class="symbol">${SLOT_SYMBOLS[Math.floor(Math.random() * SLOT_SYMBOLS.length)]}</span>`;
+                    reel.appendChild(div);
+                }
+                
+                // Финальный символ
+                const finalDiv = document.createElement('div');
+                finalDiv.className = 'slot-symbol';
+                finalDiv.innerHTML = `<span class="symbol">${finalSymbols[index]}</span>`;
+                reel.appendChild(finalDiv);
+            });
+            
+            setTimeout(() => {
+                reels.forEach((reel, index) => {
+                    // Более ровные и предсказуемые длительности
+                    const baseDuration = 1350 + (index * 380);
+                    const duration = baseDuration; // убрал Math.random() для ровности
+                    
+                    reel.style.transition = `transform ${duration}ms cubic-bezier(0.22, 0.9, 0.25, 1)`;
+                    
+                    // Более точный расчёт прокрутки
+                    const symbolsToScroll = 28;
+                    const scrollDistance = (symbolsToScroll * 120) + (index * 15);
+                    reel.style.transform = `translateY(-${scrollDistance}px)`;
+                    
+                    if (index === 2) {
+                        setTimeout(() => {
+                            // Лёгкий "откат" для ощущения реальности
+                            reel.style.transition = `transform 280ms cubic-bezier(0.3, 0, 0.2, 1)`;
+                            reel.style.transform = `translateY(-${scrollDistance - 18}px)`;
+                            
+                            setTimeout(() => {
+                                onComplete();
+                            }, 300);
+                        }, duration);
+                    }
+                });
+            }, 40);
+        }
+
+        function initSlotsReels() {
+            const containers = [
+                document.getElementById('reel-symbols-1'),
+                document.getElementById('reel-symbols-2'),
+                document.getElementById('reel-symbols-3')
+            ];
+            
+            containers.forEach((container, idx) => {
+                container.innerHTML = '';
+                // Show initial symbols
+                for (let i = 0; i < 3; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'slot-symbol';
+                    const sym = SLOT_SYMBOLS[(idx + i) % SLOT_SYMBOLS.length];
+                    div.innerHTML = `<span class="symbol">${sym}</span>`;
+                    container.appendChild(div);
+                }
+            });
+        }
+
+        // ==================== ROULETTE GAME (упрощённая версия) ====================
+        let currentRouletteBet = 50;
+        let currentRouletteBetType = 'red';
+        
+        // Упрощённая рулетка: 3 равных сектора (по просьбе заказчика)
+        const ROULETTE_COLORS = ['red', 'black', 'green'];
+        
+        function getRouletteColor(num) {
+            // Для упрощённой версии не используется
+            return num === 0 ? 'green' : (num % 2 === 0 ? 'black' : 'red');
+        }
+        
+        function selectRouletteBetType(type) {
+            currentRouletteBetType = type;
+            
+            // Обновляем визуальное выделение
+            document.getElementById('bet-red').classList.toggle('!border-[#D4AF37]', type === 'red');
+            document.getElementById('bet-black').classList.toggle('!border-[#D4AF37]', type === 'black');
+            document.getElementById('bet-green').classList.toggle('!border-[#D4AF37]', type === 'green');
+        }
+        
+        function updateRouletteBet() {
+            const slider = document.getElementById('roulette-bet-slider');
+            const input = document.getElementById('roulette-bet-input');
+            const display = document.getElementById('roulette-bet-display');
+            
+            currentRouletteBet = parseInt(slider.value);
+            input.value = currentRouletteBet;
+            display.textContent = `${currentRouletteBet} AUR`;
+        }
+        
+        function updateRouletteBetFromInput() {
+            const input = document.getElementById('roulette-bet-input');
+            let val = parseInt(input.value);
+            if (isNaN(val)) val = 50;
+            val = Math.max(5, Math.min(500, val));
+            
+            currentRouletteBet = val;
+            document.getElementById('roulette-bet-slider').value = val;
+            document.getElementById('roulette-bet-display').textContent = `${val} AUR`;
+        }
+        
+        function drawRouletteWheel(canvas) {
+            const ctx = canvas.getContext('2d', { alpha: true });
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 12;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Упрощённое колесо — 3 больших равных сектора
+            const sectorAngle = (2 * Math.PI) / 3;
+            const colors = [
+                { name: 'red',   fill: '#9F1239', label: 'КРАСНОЕ' },
+                { name: 'black', fill: '#111111', label: 'ЧЁРНОЕ' },
+                { name: 'green', fill: '#166534', label: 'ЗЕЛЁНОЕ' }
+            ];
+            
+            colors.forEach((sector, index) => {
+                const startAngle = index * sectorAngle - (Math.PI / 2);
+                const endAngle = startAngle + sectorAngle;
+                
+                // Сектор
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = sector.fill;
+                ctx.fill();
+                
+                // Золотая граница
+                ctx.strokeStyle = '#D4AF37';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+                
+                // Надпись
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(startAngle + sectorAngle / 2);
+                ctx.textAlign = 'center';
+                ctx.fillStyle = '#F5F5F5';
+                ctx.font = 'bold 15px Inter, system-ui';
+                ctx.fillText(sector.label, radius * 0.62, 6);
+                ctx.restore();
+            });
+            
+            // Центральный круг
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius * 0.22, 0, Math.PI * 2);
+            ctx.fillStyle = '#1A1A1A';
+            ctx.fill();
+            ctx.strokeStyle = '#D4AF37';
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            
+            // Внутреннее кольцо
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius * 0.13, 0, Math.PI * 2);
+            ctx.strokeStyle = '#C5A46E';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+            
+            // Точка в центре
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#D4AF37';
+            ctx.fill();
+        }
+        
+        let rouletteAngle = 0;
+        
+        function spinRoulette() {
+            const btn = document.getElementById('roulette-spin-btn');
+            if (btn.disabled) return;
+            
+            if (state.balance < currentRouletteBet) {
+                showToast('Недостаточно средств', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-sync fa-spin"></i> <span>ВРАЩАЕМ...</span>`;
+            
+            const canvas = document.getElementById('roulette-canvas');
+            const tier = getTier(currentRouletteBet);
+            const chances = getWinChances(tier);
+            
+            // === УПРОЩЁННАЯ РУЛЕТКА С РАВНЫМИ ШАНСАМИ ===
+            // 3 цвета с равной вероятностью (по 1/3), как просил заказчик
+            let winningColor;
+            const rand = Math.random();
+            
+            // Определяем цвет с равными шансами
+            if (rand < 0.333) {
+                winningColor = 'red';
+            } else if (rand < 0.666) {
+                winningColor = 'black';
+            } else {
+                winningColor = 'green';
+            }
+            
+            // Небольшая корректировка под tier (высокие ставки чуть чаще дают зелёное)
+            if (tier === 'high' && Math.random() < 0.12) {
+                winningColor = 'green';
+            } else if (tier === 'medium' && Math.random() < 0.06 && winningColor !== 'green') {
+                if (Math.random() < 0.5) winningColor = 'green';
+            }
+            
+            // Анимация колеса (3 больших сектора)
+            const sectorAngle = 120; // 360 / 3
+            let targetSectorIndex;
+            
+            if (winningColor === 'red') targetSectorIndex = 0;
+            else if (winningColor === 'black') targetSectorIndex = 1;
+            else targetSectorIndex = 2;
+            
+            const targetAngle = 360 - (targetSectorIndex * sectorAngle) - (sectorAngle / 2);
+            const extraRotations = 6 + Math.floor(Math.random() * 4);
+            const finalAngle = rouletteAngle + (extraRotations * 360) + targetAngle + (Math.random() * 12 - 6);
+            
+            const startTime = performance.now();
+            const duration = 4300;
+            
+            function animateSpin(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3.2);
+                const currentAngle = rouletteAngle + (finalAngle - rouletteAngle) * eased;
+                
+                canvas.style.transform = `rotate(${currentAngle}deg)`;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animateSpin);
+                } else {
+                    rouletteAngle = finalAngle % 360;
+                    canvas.style.transform = `rotate(${rouletteAngle}deg)`;
+                    
+                    // Обрабатываем результат
+                    processRouletteResultSimplified(winningColor, btn);
+                }
+            }
+            
+            requestAnimationFrame(animateSpin);
+        }
+        
+        // Мотивирующие фразы после проигрыша
+        const MOTIVATIONAL_PHRASES = [
+            "В следующий раз точно повезёт!",
+            "Удача уже рядом, не сдавайся!",
+            "Бывает. Следующий спин будет твоим.",
+            "Казино любит тех, кто не сдаётся 😉",
+            "Почти! В следующий раз сорвёшь куш.",
+            "Не расстраивайся — высокие ставки ждут своего героя.",
+            "Фортуна улыбается настойчивым.",
+            "Это было близко. Следующий раз — твой!",
+            "Главное — не останавливаться. Удача любит смелых.",
+            "В следующий раз будет ещё лучше!"
+        ];
+        
+        function getRandomMotivationalPhrase() {
+            return MOTIVATIONAL_PHRASES[Math.floor(Math.random() * MOTIVATIONAL_PHRASES.length)];
+        }
+        
+        function processRouletteResultSimplified(winningColor, btn) {
+            const isWin = currentRouletteBetType === winningColor;
+            
+            let multiplier = 0;
+            let payout = 0;
+            
+            if (isWin) {
+                if (currentRouletteBetType === 'green') {
+                    multiplier = 18; // Сделали x18, чтобы было честно и интересно
+                } else {
+                    multiplier = 2;
+                }
+                payout = Math.floor(currentRouletteBet * multiplier);
+            }
+            
+            const netChange = payout - currentRouletteBet;
+            const newBalance = state.balance + netChange;
+            
+            updateBalance(newBalance);
+            
+            const resultEl = document.getElementById('roulette-result-text');
+            
+            let colorName = winningColor === 'red' ? 'Красное' : 
+                           winningColor === 'black' ? 'Чёрное' : 'Зелёное';
+            
+            let description = `Рулетка • ${currentRouletteBetType.toUpperCase()} • Выпало ${colorName}`;
+            
+            if (isWin) {
+                description += ` • Выигрыш ${payout}`;
+                addTransaction('roulette', payout, description, newBalance);
+                
+                resultEl.innerHTML = `
+                    <div>
+                        <span class="text-[#4ADE80] text-2xl font-bold">ВЫИГРЫШ! +${payout} AUR</span>
+                        <div class="text-xs mt-1 text-[#A3A3A3]">${multiplier}x • ${colorName}</div>
+                    </div>
+                `;
+                
+                if (multiplier === 18 || (currentRouletteBet >= 100 && payout >= currentRouletteBet * 8)) {
+                    launchConfetti(85);
+                    showToast(`🎉 КРУПНЫЙ ВЫИГРЫШ! +${payout} AUR`, 'success');
+                } else {
+                    showToast(`Вы выиграли ${payout} AUR`, 'success');
+                }
+            } else {
+                description += ` • Проигрыш`;
+                addTransaction('roulette', -currentRouletteBet, description, newBalance);
+                
+                const phrase = getRandomMotivationalPhrase();
+                
+                resultEl.innerHTML = `
+                    <div>
+                        <span class="text-[#9F1239] text-xl">Выпало ${colorName}</span>
+                        <div class="text-sm mt-1.5 text-[#A3A3A3] italic">"${phrase}"</div>
+                    </div>
+                `;
+            }
+            
+            // Re-enable button
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-sync"></i> <span>ЗАПУСТИТЬ РУЛЕТКУ</span>`;
+            }, 1500);
+        }
+        
+        function initRoulette() {
+            const canvas = document.getElementById('roulette-canvas');
+            drawRouletteWheel(canvas);
+            
+            // Initial bet type
+            selectRouletteBetType('red');
+            
+            // Set initial values
+            document.getElementById('roulette-bet-slider').value = currentRouletteBet;
+            document.getElementById('roulette-bet-input').value = currentRouletteBet;
+            document.getElementById('roulette-bet-display').textContent = `${currentRouletteBet} AUR`;
+        }
+
+        // ==================== HISTORY ====================
+        let currentFilter = 'all';
+        
+        function renderHistory(filter = currentFilter) {
+            const tbody = document.getElementById('history-table');
+            tbody.innerHTML = '';
+            
+            let filtered = state.transactions;
+            
+            if (filter === 'deposit') {
+                filtered = filtered.filter(t => t.type === 'deposit');
+            } else if (filter === 'game') {
+                filtered = filtered.filter(t => t.type === 'slots' || t.type === 'roulette');
+            } else if (filter === 'win') {
+                filtered = filtered.filter(t => t.amount > 0 && (t.type === 'slots' || t.type === 'roulette'));
+            }
+            
+            if (filtered.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="5" class="px-8 py-12 text-center text-[#666]">
+                        <i class="fa-solid fa-inbox text-3xl mb-3 block"></i>
+                        История пуста
+                    </td>
+                `;
+                tbody.appendChild(row);
+                return;
+            }
+            
+            filtered.forEach(tx => {
+                const row = document.createElement('tr');
+                row.className = 'transaction-row';
+                
+                const date = new Date(tx.date);
+                const dateStr = date.toLocaleDateString('ru-RU', { 
+                    day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' 
+                });
+                
+                let typeLabel = '';
+                if (tx.type === 'deposit') typeLabel = `<span class="px-3 py-0.5 text-xs rounded-full bg-[#27251f] text-[#D4AF37]">ПОПОЛНЕНИЕ</span>`;
+                else if (tx.type === 'slots') typeLabel = `<span class="px-3 py-0.5 text-xs rounded-full bg-[#1F2A1F] text-[#4ADE80]">СЛОТЫ</span>`;
+                else if (tx.type === 'roulette') typeLabel = `<span class="px-3 py-0.5 text-xs rounded-full bg-[#2A1F2A] text-[#C084FC]">РУЛЕТКА</span>`;
+                
+                const amountColor = tx.amount >= 0 ? 'text-[#4ADE80]' : 'text-[#9F1239]';
+                const amountSign = tx.amount >= 0 ? '+' : '';
+                
+                row.innerHTML = `
+                    <td class="px-8 py-4 text-[#A3A3A3] whitespace-nowrap">${dateStr}</td>
+                    <td class="px-6 py-4">${typeLabel}</td>
+                    <td class="px-6 py-4 text-sm text-[#D1D5DB]">${tx.description}</td>
+                    <td class="px-8 py-4 text-right font-medium ${amountColor} tabular-nums">${amountSign}${tx.amount.toLocaleString('ru-RU')}</td>
+                    <td class="px-8 py-4 text-right text-[#A3A3A3] tabular-nums">${tx.balanceAfter.toLocaleString('ru-RU')}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        function filterHistory(filter) {
+            currentFilter = filter;
+            
+            // Update active button styles
+            document.querySelectorAll('[id^="filter-"]').forEach(btn => {
+                btn.classList.remove('bg-[#D4AF37]', 'text-black');
+                btn.classList.add('bg-[#1A1A1A]', 'border', 'border-[#3F3F46]');
+            });
+            
+            const activeBtn = document.getElementById('filter-' + filter);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-[#D4AF37]', 'text-black');
+                activeBtn.classList.remove('bg-[#1A1A1A]', 'border', 'border-[#3F3F46]');
+            }
+            
+            renderHistory(filter);
+        }
+        
+        function clearHistory() {
+            if (!confirm('Очистить всю историю? Это действие нельзя отменить.')) return;
+            
+            state.transactions = [];
+            saveState();
+            renderHistory(currentFilter);
+            showToast('История очищена', 'info');
+        }
+
+        // ==================== TOAST & CONFETTI ====================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            
+            const toast = document.createElement('div');
+            toast.className = `toast flex items-center gap-x-3 px-6 py-4 rounded-2xl shadow-2xl max-w-sm ${
+                type === 'success' ? 'bg-[#166534] border border-[#4ADE80]' : 
+                type === 'error' ? 'bg-[#9F1239] border border-[#F87171]' : 
+                'bg-[#1A1A1A] border border-[#3F3F46]'
+            }`;
+            
+            let icon = '';
+            if (type === 'success') icon = '<i class="fa-solid fa-check-circle text-[#4ADE80]"></i>';
+            else if (type === 'error') icon = '<i class="fa-solid fa-exclamation-circle text-[#F87171]"></i>';
+            else icon = '<i class="fa-solid fa-info-circle text-[#D4AF37]"></i>';
+            
+            toast.innerHTML = `
+                <div class="flex items-center gap-x-3">
+                    ${icon}
+                    <div class="text-sm font-medium">${message}</div>
+                </div>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.3s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3800);
+        }
+        
+        function launchConfetti(count = 60) {
+            const colors = ['#D4AF37', '#C5A46E', '#9F1239', '#4ADE80'];
+            const container = document.body;
+            
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.zIndex = '9999';
+                particle.style.width = '8px';
+                particle.style.height = '8px';
+                particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = Math.random() * window.innerWidth + 'px';
+                particle.style.top = '-20px';
+                particle.style.opacity = Math.random() + 0.6;
+                particle.style.pointerEvents = 'none';
+                
+                container.appendChild(particle);
+                
+                const duration = 2200 + Math.random() * 1800;
+                const angle = Math.random() * 70 + 55; // spread
+                const velocity = 4 + Math.random() * 7;
+                
+                let start = null;
+                
+                function fall(timestamp) {
+                    if (!start) start = timestamp;
+                    const progress = (timestamp - start) / duration;
+                    
+                    if (progress < 1) {
+                        const y = progress * (window.innerHeight + 150);
+                        const x = parseFloat(particle.style.left) + Math.sin(progress * 6) * 1.5;
+                        
+                        particle.style.transform = `translateY(${y}px) rotate(${progress * 720}deg)`;
+                        particle.style.left = x + 'px';
+                        
+                        if (progress > 0.7) {
+                            particle.style.opacity = (1 - progress) * 0.8;
+                        }
+                        
+                        requestAnimationFrame(fall);
+                    } else {
+                        particle.remove();
+                    }
+                }
+                
+                requestAnimationFrame(fall);
+            }
+        }
+
+        // ==================== GAME MODALS ====================
+        function openGameModal(game) {
+            if (game === 'slots') {
+                document.getElementById('slots-modal').classList.remove('hidden');
+                document.getElementById('slots-modal').classList.add('flex');
+                initSlotsReels();
+                updateSlotsBet();
+                document.getElementById('slots-result-text').innerHTML = '';
+            } else if (game === 'roulette') {
+                document.getElementById('roulette-modal').classList.remove('hidden');
+                document.getElementById('roulette-modal').classList.add('flex');
+                initRoulette();
+                document.getElementById('roulette-result-text').innerHTML = '';
+            }
+        }
+        
+        function closeGameModal(game) {
+            if (game === 'slots') {
+                const modal = document.getElementById('slots-modal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            } else if (game === 'roulette') {
+                const modal = document.getElementById('roulette-modal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // ==================== INITIALIZATION ====================
+        function initializeApp() {
+            loadState();
+            
+            // Set initial balance display
+            const balanceEls = document.querySelectorAll('#header-balance');
+            balanceEls.forEach(el => el.textContent = state.balance.toLocaleString('ru-RU'));
+            
+            updateStatsDisplay();
+            
+            // Set default active nav
+            document.getElementById('nav-home').classList.add('active');
+            
+            // Initialize slots bet display
+            const slotsSlider = document.getElementById('slots-bet-slider');
+            if (slotsSlider) {
+                slotsSlider.addEventListener('input', updateSlotsBet);
+                // Set initial
+                setTimeout(() => {
+                    if (document.getElementById('slots-bet-display')) {
+                        document.getElementById('slots-bet-display').innerHTML = 
+                            `${currentSlotsBet} <span class="text-sm text-[#A3A3A3]">AUR</span>`;
+                    }
+                }, 100);
+            }
+            
+            // Keyboard support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const slotsModal = document.getElementById('slots-modal');
+                    const rouletteModal = document.getElementById('roulette-modal');
+                    
+                    if (!slotsModal.classList.contains('hidden')) {
+                        closeGameModal('slots');
+                    } else if (!rouletteModal.classList.contains('hidden')) {
+                        closeGameModal('roulette');
+                    }
+                }
+                
+                if (e.key.toLowerCase() === '?' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    showSection('promo');
+                }
+            });
+            
+            // Welcome message for first time
+            if (state.transactions.length <= 1) {
+                setTimeout(() => {
+                    showToast('Добро пожаловать в Аурельское Казино! 🎰', 'info');
+                }, 1200);
+            }
+            
+            // Make sure home is visible
+            showSection('home');
+            
+            console.log('%c[Аурельское Казино] Сайт успешно инициализирован', 'color:#666');
+        }
+        
+        // Boot the application
+        window.onload = initializeApp;
+        
+        // Expose some functions for debugging (optional)
+        window.AurelCasino = { state, deposit, activatePromoCode };
+    </script>
+</body>
+</html>
